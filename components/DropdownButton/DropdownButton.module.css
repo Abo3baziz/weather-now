@@ -1,0 +1,19 @@
+.dropdownButton {
+  border-radius: var(--space-2);
+  background-color: var(--surface-secondary);
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: none;
+  color: var(--text-primary);
+  column-gap: var(--space-2);
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.dropdownButton:focus {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
