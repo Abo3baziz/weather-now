@@ -30,7 +30,7 @@
 
   --font-dm-sans-regular: var(--font-dm-sans-regular);
   --font-dm-sans-italic: var(--font-dm-sans-italic);
-  --font-bricolage-font: var(--font-bricolage-font);
+  --font-bricolage: var(--font-bricolage);
 }
 
 html {
