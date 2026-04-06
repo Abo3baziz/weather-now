@@ -1,0 +1,10 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: calc(50px / var(--parent-size) * 1rem)
+    calc(124px / var(--parent-size) * 1rem);
+  row-gap: calc(70px / var(--parent-size) * 1rem);
+  align-items: center;
+  max-width: calc(1440px / var(--parent-size) * 1rem);
+  margin: 0 auto;
+}
