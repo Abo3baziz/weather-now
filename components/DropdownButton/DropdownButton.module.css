@@ -11,9 +11,9 @@
   border: none;
   cursor: pointer;
   position: relative;
-}
 
-.dropdownButton:focus {
-  outline: 2px solid white;
-  outline-offset: 3px;
+  &:focus {
+    outline: 2px solid white;
+    outline-offset: 3px;
+  }
 }
