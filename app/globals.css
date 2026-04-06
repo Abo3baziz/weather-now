@@ -21,7 +21,7 @@
 
   --surface-primary: var(--neutral-900);
   --surface-secondary: var(--neutral-800);
-  --surface-elevated: var(--color-neutral-700);
+  --surface-elevated: var(--neutral-700);
   --surface-button-hover: var(--blue-700);
   --surface-button: var(--blue-500);
 
