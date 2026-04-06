@@ -1,0 +1,7 @@
+.header {
+  font-family: var(--font-bricolage);
+  text-align: center;
+  font-size: calc(26px / var(--parent-size) * 1rem);
+  letter-spacing: 2px;
+  width: -webkit-fill-available;
+}
