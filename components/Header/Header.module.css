@@ -5,3 +5,11 @@
   letter-spacing: 2px;
   width: -webkit-fill-available;
 }
+
+@media (width <= 450px) {
+  .header {
+    font-size: calc(24px / var(--parent-size) * 1rem);
+    text-align: center;
+    word-break: break-word;
+  }
+}

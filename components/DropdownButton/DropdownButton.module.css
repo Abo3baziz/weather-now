@@ -11,9 +11,21 @@
   border: none;
   cursor: pointer;
   position: relative;
+  transition-duration: 100ms;
+  transition-property: width;
 
   &:focus {
     outline: 2px solid white;
     outline-offset: 3px;
+  }
+}
+
+.wrapper {
+  position: relative;
+}
+
+@media (width <= 450px) {
+  .dropdownButton {
+    width: 6rem;
   }
 }
