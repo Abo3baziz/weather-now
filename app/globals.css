@@ -24,6 +24,7 @@
   --surface-elevated: var(--neutral-700);
   --surface-button-hover: var(--blue-700);
   --surface-button: var(--blue-500);
+  --surface-line: var(--neutral-600);
 
   --text-primary: var(--neutral-0);
   --text-secondary: var(--neutral-300);
