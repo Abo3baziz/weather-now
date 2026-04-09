@@ -20,7 +20,6 @@ export default function SwitchButton() {
   } else {
     systemState = "imperial";
   }
-  console.log(isCelsius, isKm, isMm);
   return (
     <button
       style={{ fontSize: 16 }}
