@@ -1,0 +1,38 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.wrapper option {
+  font-size: 15px;
+  border-radius: var(--space-1);
+  padding: 4px 8px;
+  margin: 0 0px 3px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.wrapper .active {
+  background-color: var(--surface-elevated);
+  transition-duration: 100ms;
+}
+
+.wrapper img {
+  position: absolute;
+  top: 10;
+  right: 5;
+}
+
+.wrapper .option_active::after {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background-image: url("/images/icon-checkmark.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition-duration: 100ms;
+}
