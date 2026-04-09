@@ -1,0 +1,40 @@
+.wrapper {
+  position: absolute;
+  background-color: var(--surface-secondary);
+  border-radius: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  /* align-items: start; */
+  padding: 8px 10px;
+  top: 45px;
+  right: 0;
+  min-width: 10rem;
+}
+
+.wrapper button {
+  background-color: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  width: -webkit-fill-available;
+  border-radius: 2px;
+  text-align: left;
+  padding: 3px 0px;
+  margin-bottom: 3px;
+
+  &:focus {
+    outline: 1px solid white;
+    outline-offset: 3px;
+  }
+}
+
+.wrapper > div p {
+  font-size: 10px;
+  color: var(--text-secondary);
+  /* margin: 5px 0; */
+}
+
+.wrapper hr {
+  border: 0.5px solid var(--surface-line);
+  margin: 5px 0;
+}
