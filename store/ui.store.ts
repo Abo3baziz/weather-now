@@ -6,11 +6,7 @@ type UIStoreState = {
 
 type UIStoreActions = {
   toggleSidebar: (
-    uiState?:
-      | UIStoreState["sidebarOpen"]
-      | ((
-          currentState: UIStoreState["sidebarOpen"],
-        ) => UIStoreState["sidebarOpen"]),
+    uiState?: UIStoreState | ((currentState: UIStoreState) => UIStoreState),
   ) => void;
 };
 
