@@ -1,14 +1,14 @@
 .header {
   font-family: var(--font-bricolage);
   text-align: center;
-  font-size: calc(26px / var(--parent-size) * 1rem);
+  font-size: calc(26px / var(--base) * 1rem);
   letter-spacing: 2px;
   width: -webkit-fill-available;
 }
 
 @media (width <= 450px) {
   .header {
-    font-size: calc(24px / var(--parent-size) * 1rem);
+    font-size: calc(24px / var(--base) * 1rem);
     text-align: center;
     word-break: break-word;
   }
