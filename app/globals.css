@@ -29,8 +29,7 @@
   --text-primary: var(--neutral-0);
   --text-secondary: var(--neutral-300);
 
-  --font-dm-sans-regular: var(--font-dm-sans-regular);
-  --font-dm-sans-italic: var(--font-dm-sans-italic);
+  --font-dm-sans: var(--font-dm-sans);
   --font-bricolage: var(--font-bricolage);
 }
 
@@ -49,7 +48,7 @@ body {
   min-height: 100%;
   color: var(--text-primary);
   background: var(--surface-primary);
-  font-family: var(--font-dm-sans-regular);
+  font-family: var(--font-dm-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

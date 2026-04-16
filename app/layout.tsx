@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { dmSansItalicFont, dmSansRegularFont, bricolageFont } from "./fonts";
+import { dmSansFont, bricolageFont } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Weather Now",
@@ -16,8 +16,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSansItalicFont.variable} ${dmSansRegularFont.variable} ${bricolageFont.variable}`}
-    >
+      className={`${dmSansFont.variable} ${bricolageFont.variable}`}>
       <body>{children}</body>
     </html>
   );
