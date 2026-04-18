@@ -2,7 +2,7 @@
 
 import styles from "./UnitOption.module.css";
 
-import { optionMetadataTypes } from "../UnitsWrapper/UnitsWrapper";
+import { optionMetadataTypes } from "../UnitsContainer/UnitsContainer";
 
 export default function UnitOption({
   optionName,
@@ -23,14 +23,13 @@ export default function UnitOption({
 
   return (
     <>
-      <div className={styles.wrapper}>
+      <div className={styles.container}>
         <option
           value={optionValue}
           onClick={() => {
             toggleFunction();
           }}
-          className={style}
-        >
+          className={style}>
           {optionName}
         </option>
       </div>

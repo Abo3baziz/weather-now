@@ -1,5 +1,5 @@
 import styles from "./Not-Found.module.css";
-import MainWrapper from "../MainWrapper/MainWrapper";
+import MainContainer from "../MainContainer/MainContainer";
 import iconError from "@/public/images/icon-error.svg";
 import iconRetry from "@/public/images/icon-retry.svg";
 
@@ -15,7 +15,7 @@ export default function NotFound({
   errorTitle: string | null;
 }) {
   return (
-    <MainWrapper>
+    <MainContainer>
       <Nav />
       <div className={styles.box}>
         <Image src={iconError} alt="Error icon" width={48} />
@@ -25,6 +25,6 @@ export default function NotFound({
           <Image src={iconRetry} alt="retry icon"></Image>Retry
         </button>
       </div>
-    </MainWrapper>
+    </MainContainer>
   );
 }

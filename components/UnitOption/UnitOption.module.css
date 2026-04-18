@@ -1,11 +1,11 @@
-.wrapper {
+.container {
   position: relative;
   display: flex;
   flex-direction: column;
   z-index: 1;
 }
 
-.wrapper option {
+.container option {
   font-size: 15px;
   border-radius: var(--space-1);
   padding: 4px 8px;
@@ -16,18 +16,18 @@
   cursor: pointer;
 }
 
-.wrapper .active {
+.container .active {
   background-color: var(--surface-elevated);
   transition-duration: 100ms;
 }
 
-.wrapper img {
+.container img {
   position: absolute;
   top: 10;
   right: 5;
 }
 
-.wrapper .option_active::after {
+.container .option_active::after {
   content: "";
   width: 15px;
   height: 15px;

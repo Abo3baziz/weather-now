@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./DropdownButton.module.css";
 import dropDownIcon from "@/public/images/icon-dropdown.svg";
-import UnitsWrapper from "../UnitsWrapper/UnitsWrapper";
+import UnitsContainer from "../UnitsContainer/UnitsContainer";
 
 import { useUIStore } from "@/store/ui.store";
 
@@ -17,20 +17,18 @@ export default function DropdownButton({
   const toggleUi = useUIStore((state) => state.toggleSidebar);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.container}>
       <button
         className={styles.dropdownButton}
         onClick={() => {
           toggleUi();
-        }}
-      >
+        }}>
         {children}
         <p>{text}</p>
         <Image src={dropDownIcon} alt="dropdown icon" />
       </button>
 
-      {/* Units Setting */}
-      <UnitsWrapper />
+      <UnitsContainer />
     </div>
   );
 }
