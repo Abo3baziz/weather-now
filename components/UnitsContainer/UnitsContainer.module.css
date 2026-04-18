@@ -1,4 +1,4 @@
-.wrapper {
+.container {
   position: absolute;
   background-color: var(--surface-secondary);
   border-radius: var(--space-2);
@@ -11,7 +11,7 @@
   min-width: 10rem;
 }
 
-.wrapper button {
+.container button {
   background-color: transparent;
   border: none;
   color: var(--text-primary);
@@ -28,13 +28,13 @@
   }
 }
 
-.wrapper > div p {
+.container > div p {
   font-size: 10px;
   color: var(--text-secondary);
   /* margin: 5px 0; */
 }
 
-.wrapper hr {
+.container hr {
   border: 0.5px solid var(--surface-line);
   margin: 5px 0;
 }

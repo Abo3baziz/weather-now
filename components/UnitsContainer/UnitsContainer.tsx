@@ -2,7 +2,7 @@
 
 import SwitchButton from "../SwitchButton/SwitchButton";
 import UnitOption from "../UnitOption/UnitOption";
-import styles from "./UnitsWrapper.module.css";
+import styles from "./UnitsContainer.module.css";
 
 import { useUIStore } from "@/store/ui.store";
 import { usePreferencesStore } from "@/store/preferences.store";
@@ -15,7 +15,7 @@ export type sectionOptionsMetadataTypes = {
   option_2: optionMetadataTypes;
 };
 
-export default function UnitsWrapper() {
+export default function UnitsContainer() {
   const isSidebarOpen = useUIStore((state) => state.sidebarOpen);
 
   let style: "none" | "initial";
@@ -58,7 +58,7 @@ export default function UnitsWrapper() {
 
   return (
     <>
-      <div className={styles.wrapper} style={{ display: `${style}` }}>
+      <div className={styles.container} style={{ display: `${style}` }}>
         <SwitchButton />
 
         {/* Temperature */}
@@ -93,6 +93,7 @@ export default function UnitsWrapper() {
               isActive={isKm}
               toggleFunction={toggleWindSpeed}
             />
+
             <UnitOption
               optionName={sectionOptions[1].option_2.optionName}
               optionValue={sectionOptions[1].option_2.optionValue}
