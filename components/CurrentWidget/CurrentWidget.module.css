@@ -1,0 +1,45 @@
+.container {
+  background-image: url("/images/bg-today-large.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: -webkit-fill-available;
+  height: 300px;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: var(--space-4);
+
+  & > div:first-child {
+    & p:first-child {
+      font-family: var(--font-bricolage);
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    & p:last-child {
+      color: var(--text-secondary);
+    }
+  }
+
+  & > div:last-child {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    & p:first-child {
+      font-family: var(--font-bricolage);
+      font-size: 6.5rem;
+      letter-spacing: 1px;
+      margin-left: calc(50px / var(--base) * 1rem);
+    }
+
+    & p:last-child {
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
