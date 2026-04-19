@@ -1,0 +1,36 @@
+.hourlyForecast {
+  grid-row: span 2;
+  background-color: var(--surface-secondary);
+  padding: var(--space-6) var(--space-4);
+  border-radius: var(--space-4);
+  height: 38.625rem;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #4e4e4e;
+    border-radius: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: #888;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #707070;
+  }
+}
+
+.hourlyForecast .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.825rem;
+}
+
+.hourlyForecast .hourlyForecast_body {
+  display: grid;
+  grid-template-rows: repeat(24, 1fr);
+  row-gap: 0.725rem;
+}

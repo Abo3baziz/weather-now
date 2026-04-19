@@ -1,0 +1,10 @@
+.select {
+  position: relative;
+  background-color: var(--surface-elevated);
+  border: none;
+  color: white;
+  padding: 0.5rem 0.725rem 0.5rem 0.5rem;
+  border-radius: var(--space-2);
+  cursor: pointer;
+  font-size: initial;
+}

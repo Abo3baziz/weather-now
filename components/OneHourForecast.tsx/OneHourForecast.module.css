@@ -1,0 +1,14 @@
+.OneHourForecast {
+  background-color: var(--surface-elevated);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--space-2);
+}
+
+.OneHourForecast div {
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+}
