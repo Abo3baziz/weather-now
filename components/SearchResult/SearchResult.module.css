@@ -1,0 +1,21 @@
+.result {
+  display: flex;
+  width: -webkit-fill-available;
+  color: white;
+  font-size: 1rem;
+  align-items: center;
+  padding: 5px 10px;
+  transition-duration: 100ms;
+  border-radius: var(--space-1);
+  border: none;
+  background-color: transparent;
+  column-gap: 3px;
+  img {
+    margin-right: 5px;
+  }
+}
+
+.result:hover {
+  background-color: var(--surface-elevated);
+  cursor: pointer;
+}
