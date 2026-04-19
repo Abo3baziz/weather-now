@@ -1,13 +1,31 @@
+"use client";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import Nav from "@/components/Nav/Nav";
 import Header from "@/components/Header/Header";
-import MainWrapper from "@/components/MainWrapper/MainWrapper";
+
+import MainContainer from "@/components/MainContainer/MainContainer";
+
+import Search from "@/components/Search/Search";
+import ForecastContainer from "@/components/ForecastContainer/ForecastContainer";
+
+import styles from "./page.module.css";
+
+const queryClient = new QueryClient();
 
 export default function Home() {
   return (
-    <MainWrapper>
+    <MainContainer>
       <Nav />
 
       <Header text="How's the sky looking today?" />
-    </MainWrapper>
+
+      <Search />
+
+      <QueryClientProvider client={queryClient}>
+        <ForecastContainer />
+      </QueryClientProvider>
+    </MainContainer>
   );
 }
