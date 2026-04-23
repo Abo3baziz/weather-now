@@ -25,7 +25,14 @@ export default function HourlyForecastContainer({
         </div>
         <div className={styles.hourlyForecast_body}>
           {hours.map((_hour, index) => (
-            <OneHourForecast key={index} time={_hour.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })} temperature={hourlyWeatherData.temperature[index] ?? 0} />
+            <OneHourForecast
+              key={index}
+              time={_hour.toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+              temperature={hourlyWeatherData.temperature[index] ?? 0}
+            />
           ))}
         </div>
       </section>

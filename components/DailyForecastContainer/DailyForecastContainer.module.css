@@ -9,8 +9,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   column-gap: 1.2rem;
-  overflow-x: scroll;
-  max-width: 44.147rem;
+  overflow-x: auto;
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -24,5 +23,12 @@
   }
   &::-webkit-scrollbar-thumb:hover {
     background: #707070;
+  }
+}
+
+@media (width <= 1144px) {
+  .container {
+    grid-column-start: 1;
+    grid-column-end: 3;
   }
 }

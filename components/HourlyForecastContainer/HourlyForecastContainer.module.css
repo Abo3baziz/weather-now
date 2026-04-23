@@ -34,3 +34,10 @@
   grid-template-rows: repeat(24, 1fr);
   row-gap: 0.725rem;
 }
+
+@media (width <= 1144px) {
+  .hourlyForecast {
+    grid-row-start: 3;
+    grid-column: 1/3;
+  }
+}
