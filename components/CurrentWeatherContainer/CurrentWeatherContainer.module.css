@@ -10,3 +10,17 @@
   grid-template-columns: repeat(4, 1fr);
   column-gap: 1.2rem;
 }
+
+@media (width <= 1300px) {
+  .container {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
+
+@media (width <= 570px) {
+  .smallWidgetContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}

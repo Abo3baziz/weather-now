@@ -1,7 +1,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  padding: calc(32px / var(--base) * 1rem) calc(124px / var(--base) * 1rem);
+  padding: 1rem;
   row-gap: calc(70px / var(--base) * 1rem);
   align-items: center;
   max-width: calc(1440px / var(--base) * 1rem);
