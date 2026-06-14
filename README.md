@@ -1,36 +1,306 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+---
+title: Untitled
+date created: Monday, June 15th 2026, 12:26 am
+date modified: Monday, June 15th 2026, 1:19 am
+---
 
-## Getting Started
+# Weather App
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Description
+
+A modern weather application that allows users to search for any location and view real-time weather information. The application integrates with the Open-Meteo API to provide accurate weather data, including current conditions, temperature, wind speed, humidity, and forecast details.
+
+The project was built as a frontend challenge with a focus on responsive design, API integration, performance optimization, and user experience.
+
+### Goals
+
+- Provide accurate and real-time weather information.
+    
+- Deliver a clean, responsive, and accessible user interface.
+    
+- Practice API integration and state management in a modern frontend application.
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- Next.js
+- TypeScript
+- CSS Modules 
+
+### Database
+
+- None
+
+### State Management
+
+- Zustand (Client Side State)
+- TanStack Query (Server Side State)
+
+### Deployment & Hosting
+
+- Vercel
+
+---
+
+## Features
+
+### Core Features
+
+- Search weather information by city or location.
+    
+- View current weather conditions.
+    
+- Display temperature, weather status, and weather icons.
+    
+- Show additional weather metrics:
+    
+    - Humidity
+        
+    - Wind Speed
+        
+    - Visibility
+        
+    - Feels Like Temperature
+        
+- Responsive design for desktop and mobile devices.
+
+---
+
+## Architecture
+
+### High-Level Architecture
+
+1. Users search for a location.  
+2. TanStack Query handles data fetching, caching, and synchronization with the Open-Meteo APIs.  
+3. Weather data is stored in the TanStack Query cache.  
+4. Zustand manages client-side UI state such as search history, selected locations, or user preferences.  
+5. React components consume cached data and render the UI.  
+6. CSS Modules provide scoped component styling.
+
+<img src="docs/Weather-Now-User-Flow.png">
+
+---
+
+## Project Structure
+
+```text
+## Project Structure
+
+```text
+weather-app/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── globals.css
+│   │
+│   └── components/
+│       ├── SearchBar/
+│       │   ├── SearchBar.tsx
+│       │   └── SearchBar.module.css
+│       │
+│       └── WeatherCard/
+│           ├── WeatherCard.tsx
+│           └── WeatherCard.module.css
+│
+├── public/
+│
+├── services/
+│   ├── weatherApi.ts
+│   └── geocodingApi.ts
+│
+├── store/
+│   └── weatherStore.ts
+│
+├── utils/
+│
+├── .env.local
+├── next.config.ts
+├── package.json
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
 
-## Learn More
+- Node.js (v18 or later)
+    
+- npm
 
-To learn more about Next.js, take a look at the following resources:
+### Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git clone <repository-url>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+cd weather-app
 
-## Deploy on Vercel
+npm install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The application will be available at:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## API Integration
+
+### APIs Used
+
+|API|Purpose|
+|---|---|
+|Open-Meteo Weather API|Retrieve weather data|
+|Open-Meteo Geocoding API|Convert location names into coordinates|
+
+---
+
+## Screenshots
+
+### Desktop View
+
+<img src="docs/desktop.png">
+
+### Mobile View
+
+<img src="docs/mobile.png" width="200px">
+
+---
+
+## Design Decisions
+
+### Key Technical Choices
+
+#### Next.js App Router
+
+- Decision: Use Next.js App Router.  
+- Reason: Modern routing, server components, and optimized performance.
+
+#### Zustand
+
+- Decision: Use Zustand for client state management.  
+- Reason: Lightweight, simple API, and minimal boilerplate.
+
+#### TanStack Query
+
+- Decision: Use TanStack Query for server state management.  
+- Reason: Provides caching, background refetching, loading states, and error handling out of the box.
+
+#### Open-Meteo API
+
+- Decision: Use Open-Meteo instead of paid weather services.
+    
+- Reason: Free, reliable, and does not require API keys.
+
+#### CSS Modules
+
+- Decision: Use CSS Modules for styling.  
+- Reason: Scoped styles, easy maintenance, and no runtime overhead.
+
+---
+
+## Challenges & Solutions
+
+### Challenge 1
+
+**Problem**
+
+Converting user-entered city names into coordinates required by the weather API.
+
+**Solution**
+
+Integrated the Open-Meteo Geocoding API as an intermediate step before requesting weather data.
+
+### Challenge 2
+
+**Problem**
+
+Managing loading and error states during API requests.
+
+**Solution**
+
+Implemented dedicated UI states for loading, success, and error scenarios to improve user experience.
+
+---
+
+## Performance Considerations
+
+- Debounced search requests.
+    
+- Component memoization where appropriate.
+    
+- Efficient API request handling.
+    
+- Lazy loading of non-critical assets.
+- TanStack Query caching reduces unnecessary API requests.
+- Optimized rendering through reusable components.
+
+---
+
+## Security Considerations
+
+- Environment variables used for API configuration.
+    
+- Input validation for search queries.
+    
+- Sanitized user input before API requests.
+    
+- Error handling to prevent exposing internal application details.
+
+---
+
+## Known Limitations
+
+- Requires an internet connection.
+    
+- Weather accuracy depends on Open-Meteo data availability.
+    
+- Limited historical weather information.
+    
+- No offline support.
+
+---
+
+## Roadmap
+
+- [x]  7-Day weather forecast.
+
+- [ ] Geolocation-based weather detection.
+
+- [ ] Error handling for invalid locations.
+
+- [ ] Loading states during API requests.
+
+- [ ] Favorite locations.
+
+- [ ] Multi-language support.
+
+---
+
+## Lessons Learned
+
+- Working with third-party APIs.
+    
+- Handling asynchronous data fetching.
+    
+- Managing application state effectively.
+    
+- Structuring scalable React applications.
+
+---
+
+## License
+
+MIT License
+
+Copyright (c) 2026
