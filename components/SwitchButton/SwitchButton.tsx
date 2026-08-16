@@ -22,6 +22,7 @@ export default function SwitchButton() {
   }
   return (
     <button
+      type="button"
       style={{ fontSize: 16 }}
       onClick={() => {
         toggleMetricSystem();

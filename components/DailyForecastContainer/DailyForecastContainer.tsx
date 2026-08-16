@@ -25,8 +25,8 @@ export default function DailyForecastContainer({
     isCelsius ? celsius.toFixed() : convert.temp.toF(celsius);
 
   return (
-    <section className={styles.container}>
-      <p>Daily Forecast</p>
+    <section className={styles.container} aria-labelledby="daily-forecast-heading">
+      <h2 id="daily-forecast-heading">Daily Forecast</h2>
       <div className={styles.days_container}>
         {daily.time.map((date, index) => (
           <DailyForecastDay

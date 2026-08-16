@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./NotFound.module.css";
 import MainContainer from "../MainContainer/MainContainer";
 import iconError from "@/public/images/icon-error.svg";
@@ -18,11 +20,12 @@ export default function NotFound({
     <MainContainer>
       <Nav />
       <div className={styles.box}>
-        <Image src={iconError} alt="Error icon" width={48} />
+        <Image src={iconError} alt="" aria-hidden="true" width={48} />
         <Header text={errorTitle} />
         <p>{errorMessage}</p>
-        <button>
-          <Image src={iconRetry} alt="retry icon"></Image>Retry
+        <button type="button" onClick={() => window.location.reload()}>
+          <Image src={iconRetry} alt="" aria-hidden="true" />
+          Retry
         </button>
       </div>
     </MainContainer>

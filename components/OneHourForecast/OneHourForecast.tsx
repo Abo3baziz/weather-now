@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import styles from "./OneHourForecast.module.css";
 
-import { convert, getWeatherIcon } from "@/utils";
+import { convert, getWeatherDescription, getWeatherIcon } from "@/utils";
 import { usePreferencesStore } from "@/store";
 
 type OneHourForecastTypes = {
@@ -29,7 +29,7 @@ export default function OneHourForecast({
       <div>
         <Image
           src={getWeatherIcon(weatherCode)}
-          alt="hourly weather condition"
+          alt={getWeatherDescription(weatherCode)}
           width={30}
           height={30}
         />

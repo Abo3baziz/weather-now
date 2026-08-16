@@ -5,38 +5,39 @@ import styles from "./SearchResult.module.css";
 import Image from "next/image";
 
 import { type LocationTypes } from "@/services";
-import { useLocationStore } from "@/store";
 
 export default function SearchResult({
+  id,
   location,
+  isActive,
+  onMouseEnter,
   onSelect,
 }: {
+  id: string;
   location: LocationTypes;
-  onSelect?: () => void;
+  isActive: boolean;
+  onMouseEnter: () => void;
+  onSelect: () => void;
 }) {
-  const setLocation = useLocationStore((state) => state.setActiveLocation);
+  const locationText = `${location.name}, ${
+    location?.admin === location.name ? "" : `${location?.admin},`
+  } ${location?.country}`;
 
   return (
-    <button
-      type="button"
-      className={styles.result}
-      onClick={() => {
-        setLocation({
-          name: location.name,
-          country: location.country,
-          longitude: location.longitude,
-          latitude: location.latitude,
-        });
-
-        onSelect?.();
-      }}>
+    <div
+      id={id}
+      role="option"
+      aria-selected={isActive}
+      className={`${styles.result} ${isActive ? styles.active : ""}`}
+      onMouseEnter={onMouseEnter}
+      onClick={onSelect}>
       <Image
         src={`https://hatscripts.github.io/circle-flags/flags/${location.countryCode?.toLocaleLowerCase()}.svg`}
-        alt={`${location.country} flag`}
+        alt=""
         width={25}
         height={25}
       />
-      <p>{`${location.name}, ${location?.admin === location.name ? "" : `${location?.admin},`} ${location?.country}`}</p>
-    </button>
+      <span>{locationText}</span>
+    </div>
   );
 }

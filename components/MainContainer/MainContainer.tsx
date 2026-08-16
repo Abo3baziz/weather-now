@@ -5,5 +5,9 @@ export default function MainContainer({
 }: {
   children: React.ReactNode;
 }) {
-  return <main className={styles.main}>{children}</main>;
+  return (
+    <main id="main-content" className={styles.main}>
+      {children}
+    </main>
+  );
 }

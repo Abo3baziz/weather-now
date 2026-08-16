@@ -15,7 +15,7 @@
   transition-duration: 100ms;
   transition-property: width;
 
-  &:focus {
+  &:focus-visible {
     outline: 2px solid white;
     outline-offset: 3px;
   }

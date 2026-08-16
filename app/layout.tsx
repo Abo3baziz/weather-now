@@ -85,6 +85,9 @@ export default function RootLayout({
       lang="en"
       className={`${dmSansFont.variable} ${bricolageFont.variable}`}>
       <body>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         {children}
         <script
           type="application/ld+json"

@@ -5,6 +5,10 @@
   row-gap: 0.825rem;
 }
 
+.container > h2 {
+  font-size: 1.25rem;
+}
+
 .days_container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);

@@ -4,123 +4,91 @@ import SwitchButton from "../SwitchButton/SwitchButton";
 import UnitOption from "../UnitOption/UnitOption";
 import styles from "./UnitsContainer.module.css";
 
-import { useUIStore, usePreferencesStore } from "@/store";
-
-export type optionMetadataTypes = { optionName: string; optionValue: string };
-
-export type sectionOptionsMetadataTypes = {
-  groupName: string;
-  option_1: optionMetadataTypes;
-  option_2: optionMetadataTypes;
-};
+import { usePreferencesStore } from "@/store";
 
 export default function UnitsContainer() {
-  const isSidebarOpen = useUIStore((state) => state.sidebarOpen);
-
-  const style: "none" | "initial" = isSidebarOpen ? "initial" : "none";
-
-  const sectionOptions: sectionOptionsMetadataTypes[] = [
-    {
-      groupName: "temperature",
-      option_1: { optionName: "Celsius (°C)", optionValue: "c" },
-      option_2: { optionName: "Fahrenheit (°F)", optionValue: "f" },
-    },
-    {
-      groupName: "Wind Speed",
-      option_1: { optionName: "km/h", optionValue: "km/h" },
-      option_2: { optionName: "mph", optionValue: "mph" },
-    },
-    {
-      groupName: "Precipitation",
-      option_1: { optionName: "Millimeters (mm)", optionValue: "mm" },
-      option_2: { optionName: "Inches (in)", optionValue: "in" },
-    },
-  ];
-
   const isCelsius = usePreferencesStore((state) => state.temperature.isCelsius);
-
   const isKm = usePreferencesStore((state) => state.windSpeed.isKm);
-
   const isMm = usePreferencesStore((state) => state.precipitation.isMm);
 
   const toggleTemperature = usePreferencesStore(
     (state) => state.toggleTemperature,
   );
-
+  const toggleWindSpeed = usePreferencesStore(
+    (state) => state.toggleWindSpeed,
+  );
   const togglePrecipitation = usePreferencesStore(
     (state) => state.togglePrecipitation,
   );
 
-  const toggleWindSpeed = usePreferencesStore((state) => state.toggleWindSpeed);
+  const sections = [
+    {
+      groupName: "Temperature",
+      options: [
+        {
+          optionName: "Celsius (°C)",
+          isActive: isCelsius,
+          toggle: toggleTemperature,
+        },
+        {
+          optionName: "Fahrenheit (°F)",
+          isActive: !isCelsius,
+          toggle: toggleTemperature,
+        },
+      ],
+    },
+    {
+      groupName: "Wind Speed",
+      options: [
+        { optionName: "km/h", isActive: isKm, toggle: toggleWindSpeed },
+        { optionName: "mph", isActive: !isKm, toggle: toggleWindSpeed },
+      ],
+    },
+    {
+      groupName: "Precipitation",
+      options: [
+        {
+          optionName: "Millimeters (mm)",
+          isActive: isMm,
+          toggle: togglePrecipitation,
+        },
+        {
+          optionName: "Inches (in)",
+          isActive: !isMm,
+          toggle: togglePrecipitation,
+        },
+      ],
+    },
+  ];
 
   return (
-    <>
-      <div className={styles.container} style={{ display: `${style}` }}>
-        <SwitchButton />
+    <div className={styles.container}>
+      <SwitchButton />
+      {sections.map((section, index) => {
+        const labelId = `${section.groupName.replace(/\s+/g, "-").toLowerCase()}-label`;
 
-        {/* Temperature */}
-
-        <div>
-          <p style={{ fontSize: 15 }}>{sectionOptions[0].groupName}</p>
-          <div>
-            <UnitOption
-              optionName={sectionOptions[0].option_1.optionName}
-              optionValue={sectionOptions[0].option_1.optionValue}
-              isActive={isCelsius}
-              toggleFunction={toggleTemperature}
-            />
-            <UnitOption
-              optionName={sectionOptions[0].option_2.optionName}
-              optionValue={sectionOptions[0].option_2.optionValue}
-              isActive={!isCelsius}
-              toggleFunction={toggleTemperature}
-            />
+        return (
+          <div key={section.groupName}>
+            <div role="group" aria-labelledby={labelId}>
+              <p id={labelId} className={styles.groupLabel}>
+                {section.groupName}
+              </p>
+              <div className={styles.options}>
+                {section.options.map((option) => (
+                  <UnitOption
+                    key={option.optionName}
+                    groupName={section.groupName}
+                    optionName={option.optionName}
+                    isActive={option.isActive}
+                    toggleFunction={option.toggle}
+                  />
+                ))}
+              </div>
+            </div>
+            {index < sections.length - 1 && <hr />}
           </div>
-        </div>
-
-        <hr />
-
-        {/* windSpeed */}
-        <div>
-          <p style={{ fontSize: 15 }}>{sectionOptions[1].groupName}</p>
-          <div>
-            <UnitOption
-              optionName={sectionOptions[1].option_1.optionName}
-              optionValue={sectionOptions[1].option_1.optionValue}
-              isActive={isKm}
-              toggleFunction={toggleWindSpeed}
-            />
-
-            <UnitOption
-              optionName={sectionOptions[1].option_2.optionName}
-              optionValue={sectionOptions[1].option_2.optionValue}
-              isActive={!isKm}
-              toggleFunction={toggleWindSpeed}
-            />
-          </div>
-        </div>
-
-        <hr />
-
-        {/* precipitation */}
-        <div>
-          <p style={{ fontSize: 15 }}>{sectionOptions[2].groupName}</p>
-          <div>
-            <UnitOption
-              optionName={sectionOptions[2].option_1.optionName}
-              optionValue={sectionOptions[2].option_1.optionValue}
-              isActive={isMm}
-              toggleFunction={togglePrecipitation}
-            />
-            <UnitOption
-              optionName={sectionOptions[2].option_2.optionName}
-              optionValue={sectionOptions[2].option_2.optionValue}
-              isActive={!isMm}
-              toggleFunction={togglePrecipitation}
-            />
-          </div>
-        </div>
-      </div>
-    </>
+        );
+      })}
+    </div>
   );
 }

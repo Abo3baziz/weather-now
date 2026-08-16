@@ -1,2 +1,2 @@
 export { convert } from "./unitConverting";
-export { getWeatherIcon } from "./weatherCodes";
+export { getWeatherIcon, getWeatherDescription } from "./weatherCodes";

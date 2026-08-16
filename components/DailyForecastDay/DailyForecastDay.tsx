@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import styles from "./DailyForecastDay.module.css";
 
-import { getWeatherIcon } from "@/utils";
+import { getWeatherDescription, getWeatherIcon } from "@/utils";
 
 type DailyForecastTypes = {
   day?: string;
@@ -22,7 +22,7 @@ export default function DailyForecastDay({
       <p>{day}</p>
       <Image
         src={getWeatherIcon(weatherCode)}
-        alt="forecast weather condition"
+        alt={getWeatherDescription(weatherCode)}
         width={50}
         height={50}
       />

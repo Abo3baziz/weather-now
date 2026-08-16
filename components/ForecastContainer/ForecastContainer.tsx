@@ -71,7 +71,7 @@ export default function ForecastContainer() {
 
   if (!hasValidLocation) {
     return (
-      <div className={styles.stateBox}>
+      <div className={styles.stateBox} role="status">
         <p className={styles.stateTitle}>No location selected yet</p>
         <p className={styles.stateText}>
           Search for a place above, or allow location access to see your local
@@ -83,7 +83,7 @@ export default function ForecastContainer() {
 
   if (isPending) {
     return (
-      <div className={styles.stateBox}>
+      <div className={styles.stateBox} role="status">
         <p className={styles.stateTitle}>Loading weather</p>
         <p className={styles.stateText}>Fetching the latest forecast…</p>
       </div>
@@ -92,7 +92,7 @@ export default function ForecastContainer() {
 
   if (error || !data?.weatherData) {
     return (
-      <div className={styles.stateBox}>
+      <div className={styles.stateBox} role="status">
         <p className={styles.stateTitle}>Something went wrong</p>
         <p className={styles.stateText}>
           We couldn&apos;t load the weather for this location. Please try again

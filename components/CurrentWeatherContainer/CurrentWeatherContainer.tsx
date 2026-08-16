@@ -25,6 +25,7 @@ export default function CurrentWeatherContainer({
 
   return (
     <div className={styles.container}>
+      <h2 className="sr-only">Current conditions</h2>
       <CurrentWidget
         country={locationState.country ?? ""}
         name={locationState.name ?? ""}

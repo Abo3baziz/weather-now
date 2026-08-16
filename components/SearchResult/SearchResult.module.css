@@ -11,12 +11,18 @@
   border: none;
   background-color: transparent;
   column-gap: 3px;
+  cursor: pointer;
   img {
     margin-right: 5px;
   }
 }
 
-.result:hover {
+.result:hover,
+.result.active {
   background-color: var(--surface-elevated);
-  cursor: pointer;
+}
+
+.result.active:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
 }

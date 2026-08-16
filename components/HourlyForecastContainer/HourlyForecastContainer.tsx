@@ -43,9 +43,9 @@ export default function HourlyForecastContainer({
   }
 
   return (
-    <section className={styles.hourlyForecast}>
+    <section className={styles.hourlyForecast} aria-labelledby="hourly-forecast-heading">
       <div className={styles.header}>
-        <p>Hourly forecast</p>
+        <h2 id="hourly-forecast-heading">Hourly forecast</h2>
 
         <SelectDay
           days={days.map((day) =>

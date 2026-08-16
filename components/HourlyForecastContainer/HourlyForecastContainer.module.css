@@ -29,6 +29,10 @@
   margin-bottom: 0.825rem;
 }
 
+.hourlyForecast .header h2 {
+  font-size: 1.25rem;
+}
+
 .hourlyForecast .hourlyForecast_body {
   display: grid;
   row-gap: 0.725rem;

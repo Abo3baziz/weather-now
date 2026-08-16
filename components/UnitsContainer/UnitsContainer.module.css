@@ -25,16 +25,21 @@
   padding: 3px 0px;
   margin-bottom: 3px;
 
-  &:focus {
-    outline: 1px solid white;
+  &:focus-visible {
+    outline: 2px solid white;
     outline-offset: 3px;
   }
 }
 
-.container > div p {
+.groupLabel {
   font-size: 10px;
   color: var(--text-secondary);
-  /* margin: 5px 0; */
+  margin: 5px 0;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
 }
 
 .container hr {

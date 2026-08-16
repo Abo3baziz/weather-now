@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import styles from "./CurrentWidget.module.css";
 
-import { getWeatherIcon } from "@/utils";
+import { getWeatherDescription, getWeatherIcon } from "@/utils";
 
 type CurrentWidgetTypes = {
   country: string;
@@ -43,7 +43,7 @@ export default function CurrentWidget({
         <Image
           className={styles.icon}
           src={getWeatherIcon(weatherCode)}
-          alt="current weather condition"
+          alt={getWeatherDescription(weatherCode)}
           width={80}
           height={80}
         />

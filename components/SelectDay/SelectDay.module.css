@@ -8,4 +8,9 @@
   border-radius: var(--space-2);
   cursor: pointer;
   font-size: initial;
+
+  &:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+  }
 }

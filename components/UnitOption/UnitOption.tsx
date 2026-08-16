@@ -2,16 +2,14 @@
 
 import styles from "./UnitOption.module.css";
 
-import { optionMetadataTypes } from "../UnitsContainer/UnitsContainer";
-
 export default function UnitOption({
+  groupName,
   optionName,
-  optionValue,
   isActive,
   toggleFunction,
 }: {
-  optionName: optionMetadataTypes["optionName"];
-  optionValue: optionMetadataTypes["optionValue"];
+  groupName: string;
+  optionName: string;
   isActive: boolean;
   toggleFunction: () => void;
 }) {
@@ -22,17 +20,17 @@ export default function UnitOption({
   }
 
   return (
-    <>
-      <div className={styles.container}>
-        <option
-          value={optionValue}
-          onClick={() => {
-            toggleFunction();
-          }}
-          className={style}>
-          {optionName}
-        </option>
-      </div>
-    </>
+    <div className={styles.container}>
+      <button
+        type="button"
+        aria-pressed={isActive}
+        aria-label={`${groupName}: ${optionName}`}
+        onClick={() => {
+          toggleFunction();
+        }}
+        className={style}>
+        {optionName}
+      </button>
+    </div>
   );
 }
