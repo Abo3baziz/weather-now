@@ -36,12 +36,12 @@
 }
 
 .form .search {
-  width: -webkit-fill-available;
+  width: 100%;
   position: relative;
 }
 
 .form .search .box {
-  width: -webkit-fill-available;
+  width: 100%;
   padding: 10px 15px;
   max-height: 10rem;
   overflow-y: auto;
@@ -78,6 +78,7 @@
   padding: var(--space-2) 0;
 }
 
+/* --bp-sm */
 @media (width <= 450px) {
   .form {
     flex-direction: column;

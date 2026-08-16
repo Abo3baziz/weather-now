@@ -19,6 +19,7 @@
   column-gap: 8px;
   border-radius: var(--space-2);
   padding: 0.525rem 1rem;
+  min-height: 44px;
   cursor: pointer;
   &:hover {
     background-color: var(--surface-elevated);

@@ -12,7 +12,7 @@
 
 .card .temperature_box {
   justify-content: space-between;
-  width: -webkit-fill-available;
+  width: 100%;
   display: flex;
 
   & > p:last-child {

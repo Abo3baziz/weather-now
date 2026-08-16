@@ -3,8 +3,8 @@
   background-color: var(--surface-secondary);
   padding: var(--space-6) var(--space-4);
   border-radius: var(--space-4);
-  height: 38.625rem;
-  overflow-y: scroll;
+  max-height: 38.625rem;
+  overflow-y: auto;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -31,11 +31,11 @@
 
 .hourlyForecast .hourlyForecast_body {
   display: grid;
-  grid-template-rows: repeat(24, 1fr);
   row-gap: 0.725rem;
 }
 
-@media (width <= 1300px) {
+/* --bp-xl */
+@media (width <= 1330px) {
   .hourlyForecast {
     grid-row-start: 3;
     grid-column: 1/3;

@@ -3,9 +3,10 @@
   text-align: center;
   font-size: calc(26px / var(--base) * 1rem);
   letter-spacing: 2px;
-  width: -webkit-fill-available;
+  width: 100%;
 }
 
+/* --bp-sm */
 @media (width <= 450px) {
   .header {
     font-size: calc(24px / var(--base) * 1rem);

@@ -9,6 +9,7 @@
   top: 45px;
   right: 0;
   min-width: 10rem;
+  max-width: calc(100vw - 2rem);
   z-index: 100;
 }
 
@@ -17,7 +18,8 @@
   border: none;
   color: var(--text-primary);
   cursor: pointer;
-  width: -webkit-fill-available;
+  width: 100%;
+  min-height: 44px;
   border-radius: 2px;
   text-align: left;
   padding: 3px 0px;

@@ -1,9 +1,10 @@
 .nav {
   display: flex;
   justify-content: space-between;
-  width: -webkit-fill-available;
+  width: 100%;
 }
 
+/* --bp-sm */
 @media (width <= 450px) {
   .nav img {
     width: 8rem;

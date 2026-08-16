@@ -10,6 +10,7 @@
   column-gap: var(--space-2);
   border: none;
   cursor: pointer;
+  min-height: 44px;
   position: relative;
   transition-duration: 100ms;
   transition-property: width;
@@ -25,6 +26,7 @@
   z-index: 10;
 }
 
+/* --bp-sm */
 @media (width <= 450px) {
   .dropdownButton {
     width: 6rem;

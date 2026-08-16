@@ -1,6 +1,7 @@
 .result {
   display: flex;
-  width: -webkit-fill-available;
+  width: 100%;
+  min-height: 44px;
   color: white;
   font-size: 1rem;
   align-items: center;

@@ -2,8 +2,8 @@
   background-image: url("/images/bg-today-large.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  width: -webkit-fill-available;
-  height: 300px;
+  width: 100%;
+  min-height: 300px;
   padding: 2rem 1rem;
   display: flex;
   justify-content: space-between;
@@ -30,7 +30,7 @@
 
     & p:first-child {
       font-family: var(--font-bricolage);
-      font-size: 6.5rem;
+      font-size: clamp(3.5rem, 12vw, 6.5rem);
       letter-spacing: 1px;
       margin-left: calc(50px / var(--base) * 1rem);
     }
@@ -42,6 +42,7 @@
   }
 }
 
+/* --bp-md */
 @media (width <= 768px) {
   .container {
     flex-direction: column;

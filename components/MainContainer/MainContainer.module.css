@@ -8,12 +8,14 @@
   margin: 0 auto;
 }
 
+/* --bp-xl */
 @media (width <= 1330px) {
   .main {
     padding: calc(24px / var(--base) * 1rem) calc(32px / var(--base) * 1rem);
   }
 }
 
+/* --bp-lg */
 @media (width <= 1144px) {
   .main {
     padding: calc(10px / var(--base) * 1rem) calc(32px / var(--base) * 1rem);

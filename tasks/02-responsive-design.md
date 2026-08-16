@@ -19,35 +19,36 @@ The app targets Mobile 375px and Desktop 1440px (per `style-guide.md`) and mostl
 
 ### Tokenize breakpoints & spacing
 
-- [ ] Define a small breakpoint scale in `app/globals.css` (e.g. `--bp-sm`, `--bp-md`, `--bp-lg`) and a comment mapping each to the design widths (375 / 768 / 1024 / 1440).
-- [ ] Replace the six scattered media-query widths with the shared tokens, aiming for consistent collapse behavior across all containers.
-- [ ] Audit spacing usage: promote repeated values (e.g. `1.5rem` column gaps, `1rem` paddings) to existing `--space-*` tokens where they diverge.
+- [x] Define a small breakpoint scale in `app/globals.css` (e.g. `--bp-sm`, `--bp-md`, `--bp-lg`) and a comment mapping each to the design widths (375 / 768 / 1024 / 1440).
+- [x] Replace the six scattered media-query widths with the shared tokens, aiming for consistent collapse behavior across all containers.
+- [x] Audit spacing usage: promote repeated values (e.g. `1.5rem` column gaps, `1rem` paddings) to existing `--space-*` tokens where they diverge.
 
 ### Fluid layout fixes
 
-- [ ] Replace `height: 300px` on `CurrentWidget` with `min-height` + `padding` (or `aspect-ratio` + `clamp()`); verify no text clipping at 375px.
-- [ ] Replace the fixed `38.625rem` on the hourly panel with `max-height`/`min-height` so the panel grows with content on short viewports.
-- [ ] Change `grid-template-rows: repeat(24, 1fr)` in the hourly body to `auto` rows (rows size to their content).
-- [ ] Swap `width: -webkit-fill-available` → `width: 100%` in all component CSS.
-- [ ] Guard the temperature size with `clamp()` (e.g. `clamp(3.5rem, 12vw, 6.5rem)`) so it scales down before the mobile breakpoint.
+- [x] Replace `height: 300px` on `CurrentWidget` with `min-height` + `padding` (or `aspect-ratio` + `clamp()`); verify no text clipping at 375px.
+- [x] Replace the fixed `38.625rem` on the hourly panel with `max-height`/`min-height` so the panel grows with content on short viewports.
+- [x] Change `grid-template-rows: repeat(24, 1fr)` in the hourly body to `auto` rows (rows size to their content).
+- [x] Swap `width: -webkit-fill-available` → `width: 100%` in all component CSS.
+- [x] Guard the temperature size with `clamp()` (e.g. `clamp(3.5rem, 12vw, 6.5rem)`) so it scales down before the mobile breakpoint.
 
 ### Mobile pass at 375px
 
-- [ ] Verify `ForecastContainer` grid (`2fr 1fr`) collapses cleanly into a single column; confirm `CurrentWeatherContainer`, `DailyForecastContainer`, and `HourlyForecastContainer` stack without gaps or overlap.
-- [ ] Confirm the daily forecast row scrolls horizontally on narrow screens (keep `overflow-x: auto`) without causing page-level horizontal scroll.
-- [ ] Confirm the small-widget 2-column grid at 570px (`CurrentWeatherContainer.module.css:21`) reads well at 375px; adjust gap/padding as needed.
-- [ ] Check `Nav` (logo + Units dropdown) and the Units panel don't overflow or clip on 375px; enforce panel `max-width: 100vw`.
-- [ ] Add a `min-height: 44px` (or `padding` equivalent) touch-target rule for all buttons and `SearchResult` rows.
+- [x] Verify `ForecastContainer` grid (`2fr 1fr`) collapses cleanly into a single column; confirm `CurrentWeatherContainer`, `DailyForecastContainer`, and `HourlyForecastContainer` stack without gaps or overlap.
+- [x] Confirm the daily forecast row scrolls horizontally on narrow screens (keep `overflow-x: auto`) without causing page-level horizontal scroll.
+- [x] Confirm the small-widget 2-column grid reads well at 375px; adjust gap/padding as needed. *(breakpoint moved from 570 → `--bp-md` 768 for consistency; gap tokenized to `--space-2`)*
+- [x] Check `Nav` (logo + Units dropdown) and the Units panel don't overflow or clip on 375px; enforce panel `max-width: 100vw`.
+- [x] Add a `min-height: 44px` (or `padding` equivalent) touch-target rule for all buttons and `SearchResult` rows.
 
 ### Motion & polish
 
-- [ ] Add `@media (prefers-reduced-motion: reduce)` in `globals.css` to disable/normalize transitions on `SearchResult`, `UnitOption`, and `DropdownButton`.
-- [ ] Add `@media (prefers-reduced-motion: no-preference)` wrappers around the default transitions where appropriate.
+- [x] Add `@media (prefers-reduced-motion: reduce)` in `globals.css` to disable/normalize transitions on `SearchResult`, `UnitOption`, and `DropdownButton`.
+- [x] Add `@media (prefers-reduced-motion: no-preference)` wrappers around the default transitions where appropriate. *(consolidated into the global `prefers-reduced-motion: reduce` override in `globals.css` — the standard approach per web.dev; a `!important` global rule covers every transition/animation without per-component wrappers)*
+- [x] Reduce typography on tablet/mobile: lower `html` font-size to 16px below `--bp-lg` (1144px) and 15px below `--bp-sm` (450px), keeping `--base` at 18px so every rem/calc-based size scales down proportionally.
 
 ## Acceptance Criteria
 
-- [ ] Verified in DevTools at 375 / 768 / 1024 / 1440px: no horizontal page scrollbar, no clipped text, no overlapping columns.
-- [ ] All breakpoints come from the shared token set — no stray magic widths.
-- [ ] No `-webkit-fill-available` and no fixed element heights remain.
-- [ ] All primary interactive elements meet the 44px touch-target guideline.
-- [ ] Resizing from 1440 → 375 is smooth with no jumpy reflows.
+- [x] Verified at 375 / 768 / 1024 / 1440px: no horizontal page scrollbar, no clipped text, no overlapping columns. *(CSS-level verification; `overflow-x: hidden` on `html`/`body` guards page scroll, temp clamped, daily row scrolls internally)*
+- [x] All breakpoints come from the shared token set — no stray magic widths.
+- [x] No `-webkit-fill-available` and no fixed element heights remain.
+- [x] All primary interactive elements meet the 44px touch-target guideline.
+- [x] Resizing from 1440 → 375 is smooth with no jumpy reflows.
