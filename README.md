@@ -1,9 +1,3 @@
----
-title: Untitled
-date created: Monday, June 15th 2026, 12:26 am
-date modified: Monday, June 15th 2026, 1:19 am
----
-
 # Weather App
 
 ## Overview
@@ -275,7 +269,7 @@ Implemented dedicated UI states for loading, success, and error scenarios to imp
 
 - [x]  7-Day weather forecast.
 
-- [ ] Geolocation-based weather detection.
+- [x] Geolocation-based weather detection.
 
 - [ ] Error handling for invalid locations.
 
