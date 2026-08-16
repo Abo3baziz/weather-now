@@ -20,36 +20,36 @@ Give the app production-grade metadata and crawlability. The biggest structural 
 
 ### Core metadata (`app/layout.tsx`)
 
-- [ ] Add `metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000")` (or a hardcoded production URL) so relative URLs resolve to absolute.
-- [ ] Add `alternates.canonical: "/"` for the root page.
-- [ ] Add `icons` pointing at `/favicon.ico` and `/images/favicon-32x32.png`, plus an `apple-touch-icon`.
-- [ ] Add `themeColor` (match the `--surface-primary` dark background).
-- [ ] Set `viewport` metadata explicitly (`width: device-width`, `initialScale: 1`).
-- [ ] Refresh `title`/`description` to be keyword-appropriate ("Weather Now — live conditions, hourly & 7-day forecast") and under ~155 chars for the description.
+- [x] Add `metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000")` (or a hardcoded production URL) so relative URLs resolve to absolute.
+- [x] Add `alternates.canonical: "/"` for the root page.
+- [x] Add `icons` pointing at `/favicon.ico` and `/images/favicon-32x32.png`, plus an `apple-touch-icon`. *(generated `public/apple-touch-icon.png` 180×180)*
+- [x] Add `themeColor` (match the `--surface-primary` dark background).
+- [x] Set `viewport` metadata explicitly (`width: device-width`, `initialScale: 1`).
+- [x] Refresh `title`/`description` to be keyword-appropriate ("Weather Now — live conditions, hourly & 7-day forecast") and under ~155 chars for the description.
 
 ### Social sharing (Open Graph / Twitter)
 
-- [ ] Add `openGraph` block: `title`, `description`, `type: "website"`, `url`, `siteName: "Weather Now"`, and `images` (create/commit an OG image, e.g. `public/images/og-image.png` at 1200×630).
-- [ ] Add `twitter` card metadata (`summary_large_image` + title/description/image).
+- [x] Add `openGraph` block: `title`, `description`, `type: "website"`, `url`, `siteName: "Weather Now"`, and `images` (create/commit an OG image, e.g. `public/images/og-image.png` at 1200×630). *(generated 1200×630 PNG via sharp)*
+- [x] Add `twitter` card metadata (`summary_large_image` + title/description/image).
 
 ### Crawlability
 
-- [ ] Add `app/robots.ts` allowing all crawlers and referencing the sitemap.
-- [ ] Add `app/sitemap.ts` emitting the root URL from `metadataBase`.
+- [x] Add `app/robots.ts` allowing all crawlers and referencing the sitemap.
+- [x] Add `app/sitemap.ts` emitting the root URL from `metadataBase`.
 
 ### Structured data
 
-- [ ] Add JSON-LD `WebSite` + `WebApplication` (or `SoftwareApplication`) schema in the root layout (server component) with `name`, `description`, `url`, and `applicationCategory: "WeatherApplication"`.
-- [ ] (Follow-up, do not block) Document the path to dynamic per-city pages: a server-rendered route (`/city/[slug]` or search-param pages) that renders weather in the initial HTML, since client-only React Query data can't be indexed today.
+- [x] Add JSON-LD `WebSite` + `WebApplication` (or `SoftwareApplication`) schema in the root layout (server component) with `name`, `description`, `url`, and `applicationCategory: "WeatherApplication"`.
+- [x] (Follow-up, do not block) Document the path to dynamic per-city pages: a server-rendered route (`/city/[slug]` or search-param pages) that renders weather in the initial HTML, since client-only React Query data can't be indexed today. *(still client-rendered — flagged as future work; see README roadmap)*
 
 ### Verified in markup
 
-- [ ] `next build` output confirms `<html>` contains viewport, meta description, OG/Twitter tags, canonical, theme-color, and JSON-LD.
-- [ ] `robots.txt` and `sitemap.xml` resolve at `/robots.txt` and `/sitemap.xml`.
+- [x] `next build` output confirms `<html>` contains viewport, meta description, OG/Twitter tags, canonical, theme-color, and JSON-LD.
+- [x] `robots.txt` and `sitemap.xml` resolve at `/robots.txt` and `/sitemap.xml`.
 
 ## Acceptance Criteria
 
-- [ ] Lighthouse SEO category scores 100% on the built site (or only "content not server-rendered" warnings that are documented follow-ups).
-- [ ] A social-share checker (e.g. opengraph.xyz) shows a complete card with image.
-- [ ] `curl /robots.txt` and `/sitemap.xml` return valid content.
-- [ ] `<head>` contains one canonical, one `og:url`, one JSON-LD block, and no duplicate title/description.
+- [ ] Lighthouse SEO category scores 100% on the built site (or only "content not server-rendered" warnings that are documented follow-ups). *(manual audit — markup prerequisites verified below)*
+- [ ] A social-share checker (e.g. opengraph.xyz) shows a complete card with image. *(manual check — OG tags verified present in markup)*
+- [x] `curl /robots.txt` and `/sitemap.xml` return valid content.
+- [x] `<head>` contains one canonical, one `og:url`, one JSON-LD block, and no duplicate title/description.
