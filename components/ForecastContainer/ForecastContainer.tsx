@@ -30,7 +30,7 @@ export default function ForecastContainer() {
     typeof longitude === "number" &&
     (latitude !== 0 || longitude !== 0);
 
-  const { isPending, error, data, refetch } = useQuery({
+  const { error, data, refetch } = useQuery({
     queryKey: ["weatherData", latitude, longitude],
     enabled: hasValidLocation,
     queryFn: async () => {
@@ -69,28 +69,7 @@ export default function ForecastContainer() {
     });
   }, [setActiveLocation]);
 
-  if (!hasValidLocation) {
-    return (
-      <div className={styles.stateBox} role="status">
-        <p className={styles.stateTitle}>No location selected yet</p>
-        <p className={styles.stateText}>
-          Search for a place above, or allow location access to see your local
-          weather.
-        </p>
-      </div>
-    );
-  }
-
-  if (isPending) {
-    return (
-      <div className={styles.stateBox} role="status">
-        <p className={styles.stateTitle}>Loading weather</p>
-        <p className={styles.stateText}>Fetching the latest forecast…</p>
-      </div>
-    );
-  }
-
-  if (error || !data?.weatherData) {
+  if (error) {
     return (
       <div className={styles.stateBox} role="status">
         <p className={styles.stateTitle}>Something went wrong</p>
@@ -111,11 +90,11 @@ export default function ForecastContainer() {
 
   return (
     <div className={styles.container}>
-      <CurrentWeatherContainer currentWeatherData={data.weatherData.current} />
+      <CurrentWeatherContainer currentWeatherData={data?.weatherData.current} />
 
-      <DailyForecastContainer dailyWeatherData={data.weatherData.daily} />
+      <DailyForecastContainer dailyWeatherData={data?.weatherData.daily} />
 
-      <HourlyForecastContainer hourlyWeatherData={data.weatherData.hourly} />
+      <HourlyForecastContainer hourlyWeatherData={data?.weatherData.hourly} />
     </div>
   );
 }

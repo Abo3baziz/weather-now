@@ -14,6 +14,7 @@ export { default as QueryProvider } from "./QueryProvider/QueryProvider";
 export { default as Search } from "./Search/Search";
 export { default as SearchResult } from "./SearchResult/SearchResult";
 export { default as SelectDay } from "./SelectDay/SelectDay";
+export { default as Skeleton } from "./Skeleton/Skeleton";
 export { default as SmallWidget } from "./SmallWidget/SmallWidget";
 export { default as SwitchButton } from "./SwitchButton/SwitchButton";
 export { default as UnitOption } from "./UnitOption/UnitOption";

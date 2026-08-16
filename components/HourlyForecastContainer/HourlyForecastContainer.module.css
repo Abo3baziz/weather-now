@@ -38,6 +38,37 @@
   row-gap: 0.725rem;
 }
 
+.hourSkeleton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--space-2);
+  background-color: var(--surface-elevated);
+
+  & > div {
+    display: flex;
+    column-gap: 0.5rem;
+    align-items: center;
+  }
+}
+
+.iconSkeleton {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--space-2);
+}
+
+.timeLine {
+  width: 3rem;
+  height: 1rem;
+}
+
+.tempLine {
+  width: 2.5rem;
+  height: 1rem;
+}
+
 /* --bp-xl */
 @media (width <= 1330px) {
   .hourlyForecast {

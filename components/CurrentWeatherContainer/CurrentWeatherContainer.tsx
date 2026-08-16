@@ -4,6 +4,7 @@ import styles from "./CurrentWeatherContainer.module.css";
 
 import SmallWidget from "../SmallWidget/SmallWidget";
 import CurrentWidget from "../CurrentWidget/CurrentWidget";
+import Skeleton from "../Skeleton/Skeleton";
 
 import { useLocationStore, usePreferencesStore } from "@/store";
 import { convert } from "@/utils";
@@ -12,7 +13,7 @@ import { type CurrentWeather } from "@/services";
 export default function CurrentWeatherContainer({
   currentWeatherData,
 }: {
-  currentWeatherData: CurrentWeather;
+  currentWeatherData?: CurrentWeather;
 }) {
   const locationState = useLocationStore((state) => state.location);
 
@@ -22,6 +23,32 @@ export default function CurrentWeatherContainer({
 
   const formatTemp = (celsius: number) =>
     isCelsius ? celsius.toFixed() : convert.temp.toF(celsius);
+
+  if (!currentWeatherData) {
+    return (
+      <div className={styles.container}>
+        <h2 className="sr-only">Current conditions</h2>
+        <div className={styles.widgetSkeleton}>
+          <div>
+            <Skeleton className={styles.lineWide} />
+            <Skeleton className={styles.lineNarrow} />
+          </div>
+          <div>
+            <Skeleton className={styles.tempSkeleton} />
+            <Skeleton className={styles.iconSkeleton} />
+          </div>
+        </div>
+        <div className={styles.smallWidgetContainer}>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div key={index} className={styles.smallWidgetSkeleton}>
+              <Skeleton className={styles.lineNarrow} />
+              <Skeleton className={styles.lineMedium} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
