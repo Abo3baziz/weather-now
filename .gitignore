@@ -38,6 +38,7 @@ npm-debug.log*
 # Misc
 *.log
 *.pem
+*.tsbuildinfo
 .DS_Store
 Thumbs.db
 

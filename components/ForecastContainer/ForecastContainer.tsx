@@ -1,16 +1,21 @@
+"use client";
+
 import styles from "./ForecastContainer.module.css";
 
 import CurrentWeatherContainer from "../CurrentWeatherContainer/CurrentWeatherContainer";
 import DailyForecastContainer from "../DailyForecastContainer/DailyForecastContainer";
 import HourlyForecastContainer from "../HourlyForecastContainer/HourlyForecastContainer";
 
-import { useLocationStore } from "@/store/userActiveLocation.store";
-import getUserLocation from "@/services/geolocationApi";
-import { fetchWeatherData } from "@/services/fetchWeatherData";
+import { useLocationStore } from "@/store";
+import {
+  fetchCityAndTimezone,
+  fetchWeatherData,
+  getUserLocation,
+  type ReverseGeocodingResponse,
+} from "@/services";
 
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { fetchCityAndTimezone } from "@/services/reverseGeocodingWithTimezone";
 
 export default function ForecastContainer() {
   const locationState = useLocationStore((state) => state.location);
@@ -25,8 +30,7 @@ export default function ForecastContainer() {
     typeof longitude === "number" &&
     (latitude !== 0 || longitude !== 0);
 
-  // TODO add loading state to all the app based on the fetch process
-  const { isPending, data } = useQuery({
+  const { isPending, error, data, refetch } = useQuery({
     queryKey: ["weatherData", latitude, longitude],
     enabled: hasValidLocation,
     queryFn: async () => {
@@ -40,20 +44,10 @@ export default function ForecastContainer() {
     },
   });
 
-  if (!isPending) {
-    console.log(data);
-  }
-
   useEffect(() => {
     if (!data?.reverseGeocodingData) return;
 
-    const reverseData = data.reverseGeocodingData as {
-      city?: string;
-      locality?: string;
-      principalSubdivision?: string;
-      countryName?: string;
-      countryCode?: string;
-    };
+    const reverseData: ReverseGeocodingResponse = data.reverseGeocodingData;
 
     const name =
       reverseData.city ??
@@ -70,11 +64,49 @@ export default function ForecastContainer() {
   }, [data?.reverseGeocodingData, setActiveLocation]);
 
   useEffect(() => {
-    getUserLocation();
-  }, []);
+    getUserLocation({
+      onPosition: (coords) => setActiveLocation(coords),
+    });
+  }, [setActiveLocation]);
 
-  if (!data?.weatherData) {
-    return <div className={styles.container} />;
+  if (!hasValidLocation) {
+    return (
+      <div className={styles.stateBox}>
+        <p className={styles.stateTitle}>No location selected yet</p>
+        <p className={styles.stateText}>
+          Search for a place above, or allow location access to see your local
+          weather.
+        </p>
+      </div>
+    );
+  }
+
+  if (isPending) {
+    return (
+      <div className={styles.stateBox}>
+        <p className={styles.stateTitle}>Loading weather</p>
+        <p className={styles.stateText}>Fetching the latest forecast…</p>
+      </div>
+    );
+  }
+
+  if (error || !data?.weatherData) {
+    return (
+      <div className={styles.stateBox}>
+        <p className={styles.stateTitle}>Something went wrong</p>
+        <p className={styles.stateText}>
+          We couldn&apos;t load the weather for this location. Please try again
+          in a few moments.
+        </p>
+        <button
+          className={styles.retryButton}
+          onClick={() => {
+            refetch();
+          }}>
+          Retry
+        </button>
+      </div>
+    );
   }
 
   return (

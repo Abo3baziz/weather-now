@@ -4,8 +4,7 @@ import SwitchButton from "../SwitchButton/SwitchButton";
 import UnitOption from "../UnitOption/UnitOption";
 import styles from "./UnitsContainer.module.css";
 
-import { useUIStore } from "@/store/ui.store";
-import { usePreferencesStore } from "@/store/preferences.store";
+import { useUIStore, usePreferencesStore } from "@/store";
 
 export type optionMetadataTypes = { optionName: string; optionValue: string };
 
@@ -18,9 +17,7 @@ export type sectionOptionsMetadataTypes = {
 export default function UnitsContainer() {
   const isSidebarOpen = useUIStore((state) => state.sidebarOpen);
 
-  let style: "none" | "initial";
-
-  isSidebarOpen ? (style = "initial") : (style = "none");
+  const style: "none" | "initial" = isSidebarOpen ? "initial" : "none";
 
   const sectionOptions: sectionOptionsMetadataTypes[] = [
     {

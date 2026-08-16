@@ -1,6 +1,6 @@
 "use client";
 
-import { usePreferencesStore } from "@/store/preferences.store";
+import { usePreferencesStore } from "@/store";
 
 export default function SwitchButton() {
   const { toggleMetricSystem } = usePreferencesStore((state) => state);

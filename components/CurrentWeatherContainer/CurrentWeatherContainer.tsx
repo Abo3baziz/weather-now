@@ -5,21 +5,14 @@ import styles from "./CurrentWeatherContainer.module.css";
 import SmallWidget from "../SmallWidget/SmallWidget";
 import CurrentWidget from "../CurrentWidget/CurrentWidget";
 
-import { useLocationStore } from "@/store/userActiveLocation.store";
-import { usePreferencesStore } from "@/store/preferences.store";
-import { convert } from "@/utils/unitConverting";
-
-type CurrentWeatherDataTypes = {
-  humidity: number;
-  precipitation: number;
-  temperature: number;
-  windSpeed: number;
-};
+import { useLocationStore, usePreferencesStore } from "@/store";
+import { convert } from "@/utils";
+import { type CurrentWeather } from "@/services";
 
 export default function CurrentWeatherContainer({
   currentWeatherData,
 }: {
-  currentWeatherData: CurrentWeatherDataTypes;
+  currentWeatherData: CurrentWeather;
 }) {
   const locationState = useLocationStore((state) => state.location);
 
@@ -27,46 +20,40 @@ export default function CurrentWeatherContainer({
   const isKm = usePreferencesStore((state) => state.windSpeed.isKm);
   const isMm = usePreferencesStore((state) => state.precipitation.isMm);
 
+  const formatTemp = (celsius: number) =>
+    isCelsius ? celsius.toFixed() : convert.temp.toF(celsius);
+
   return (
     <div className={styles.container}>
       <CurrentWidget
         country={locationState.country ?? ""}
         name={locationState.name ?? ""}
-        temperature={
-          currentWeatherData?.temperature && isCelsius
-            ? currentWeatherData?.temperature.toFixed()
-            : convert.temp.toF(currentWeatherData?.temperature)
-        }
+        temperature={formatTemp(currentWeatherData.temperature)}
+        weatherCode={currentWeatherData.weatherCode}
       />
       <div className={styles.smallWidgetContainer}>
         <SmallWidget
           property="Feels Like"
-          value={
-            currentWeatherData?.temperature && isCelsius
-              ? currentWeatherData?.temperature.toFixed() + "°"
-              : convert.temp.toF(currentWeatherData?.temperature) + "°"
-          }
+          value={`${formatTemp(currentWeatherData.apparentTemperature)}°`}
         />
         <SmallWidget
           property="Humidity"
-          value={currentWeatherData?.humidity + "%"}
+          value={`${currentWeatherData.humidity}%`}
         />
         <SmallWidget
           property="Wind"
           value={
-            currentWeatherData?.windSpeed && isKm
-              ? currentWeatherData?.windSpeed.toFixed() + " Km/h"
-              : convert.speed.toMph(currentWeatherData?.windSpeed) + " mph"
+            isKm
+              ? `${currentWeatherData.windSpeed.toFixed()} Km/h`
+              : `${convert.speed.toMph(currentWeatherData.windSpeed)} mph`
           }
         />
         <SmallWidget
           property="Precipitation"
           value={
-            currentWeatherData?.precipitation.toString() && isMm
-              ? currentWeatherData?.precipitation + " mm"
-              : convert.length
-                  .mmToInch(currentWeatherData?.precipitation)
-                  .toString() + " Inch"
+            isMm
+              ? `${currentWeatherData.precipitation} mm`
+              : `${convert.length.mmToInch(currentWeatherData.precipitation)} in`
           }
         />
       </div>

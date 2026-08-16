@@ -1,19 +1,21 @@
-"use client";
+import Image from "next/image";
 
 import styles from "./CurrentWidget.module.css";
 
-import { useLocationStore } from "@/store/userActiveLocation.store";
+import { getWeatherIcon } from "@/utils";
 
 type CurrentWidgetTypes = {
   country: string;
   name: string;
   temperature: string;
+  weatherCode?: number;
 };
 
 export default function CurrentWidget({
   country,
   name,
   temperature,
+  weatherCode,
 }: CurrentWidgetTypes) {
   const clientDate = new Date();
 
@@ -24,29 +26,28 @@ export default function CurrentWidget({
     year: "numeric",
   });
 
-  const locationState = useLocationStore((state) => state.location);
-  return (
-    <>
-      <section className={styles.container}>
-        <div>
-          <p className={styles.location}>
-            {true ? `${locationState.name}, ${locationState.country}` : ""}
-          </p>
+  const locationText = [name, country].filter(Boolean).join(", ");
 
-          <p className={styles.date}>{formattedClientDate}</p>
-        </div>
-        <div>
-          <p className={styles.temperature}>
-            {temperature ? `${temperature}°` : "-"}
-          </p>
-          {/* TODO pass icon here */}
-          <p
-            className={styles.icon}
-            style={{
-              backgroundImage: `url("${"/images/icon-drizzle.webp"}")`,
-            }}></p>
-        </div>
-      </section>
-    </>
+  return (
+    <section className={styles.container}>
+      <div>
+        <p className={styles.location}>{locationText}</p>
+
+        <p className={styles.date}>{formattedClientDate}</p>
+      </div>
+      <div>
+        <p className={styles.temperature}>
+          {temperature ? `${temperature}°` : "-"}
+        </p>
+
+        <Image
+          className={styles.icon}
+          src={getWeatherIcon(weatherCode)}
+          alt="current weather condition"
+          width={80}
+          height={80}
+        />
+      </div>
+    </section>
   );
 }

@@ -2,24 +2,30 @@ import Image from "next/image";
 
 import styles from "./DailyForecastDay.module.css";
 
-import icon from "@/public/images/icon-fog.webp";
+import { getWeatherIcon } from "@/utils";
 
 type DailyForecastTypes = {
   day?: string;
   temperatureMin?: string;
   temperatureMax?: string;
+  weatherCode?: number;
 };
 
 export default function DailyForecastDay({
   day,
   temperatureMin,
   temperatureMax,
+  weatherCode,
 }: DailyForecastTypes) {
   return (
     <div className={styles.card}>
       <p>{day}</p>
-      {/* TODO render Custom icon based on weather condition*/}
-      <Image src={icon} alt="icon" width={50} />
+      <Image
+        src={getWeatherIcon(weatherCode)}
+        alt="forecast weather condition"
+        width={50}
+        height={50}
+      />
       <div className={styles.temperature_box}>
         <p>{temperatureMax}</p>
         <p>{temperatureMin}</p>

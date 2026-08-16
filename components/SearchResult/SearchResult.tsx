@@ -1,23 +1,26 @@
+"use client";
+
 import styles from "./SearchResult.module.css";
 
 import Image from "next/image";
 
-import { LocationTypes } from "@/services/citySearchService";
-import { useLocationStore } from "@/store/userActiveLocation.store";
+import { type LocationTypes } from "@/services";
+import { useLocationStore } from "@/store";
 
 export default function SearchResult({
   location,
+  onSelect,
 }: {
   location: LocationTypes;
+  onSelect?: () => void;
 }) {
   const setLocation = useLocationStore((state) => state.setActiveLocation);
 
   return (
     <button
+      type="button"
       className={styles.result}
-      onClick={(e) => {
-        e.preventDefault();
-
+      onClick={() => {
         setLocation({
           name: location.name,
           country: location.country,
@@ -25,11 +28,11 @@ export default function SearchResult({
           latitude: location.latitude,
         });
 
-        // TODO close result box function
+        onSelect?.();
       }}>
       <Image
         src={`https://hatscripts.github.io/circle-flags/flags/${location.countryCode?.toLocaleLowerCase()}.svg`}
-        alt="flag"
+        alt={`${location.country} flag`}
         width={25}
         height={25}
       />

@@ -5,7 +5,7 @@ import styles from "./DropdownButton.module.css";
 import dropDownIcon from "@/public/images/icon-dropdown.svg";
 import UnitsContainer from "../UnitsContainer/UnitsContainer";
 
-import { useUIStore } from "@/store/ui.store";
+import { useUIStore } from "@/store";
 
 export default function DropdownButton({
   children,

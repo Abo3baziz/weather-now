@@ -35,9 +35,7 @@
       margin-left: calc(50px / var(--base) * 1rem);
     }
 
-    & p:last-child {
-      background-repeat: no-repeat;
-      background-size: cover;
+    & .icon {
       width: 80px;
       height: 80px;
     }

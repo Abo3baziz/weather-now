@@ -1,64 +1,42 @@
 "use client";
 
-import { usePreferencesStore } from "@/store/preferences.store";
-import { convert } from "@/utils/unitConverting";
+import { usePreferencesStore } from "@/store";
+import { convert } from "@/utils";
 import DailyForecastDay from "../DailyForecastDay/DailyForecastDay";
 
 import styles from "./DailyForecastContainer.module.css";
-
-type DailyWeatherDataTypes = {
-  temperatureMax: number[];
-  temperatureMin: number[];
-  time: Date[];
-};
+import { type DailyWeather } from "@/services";
 
 export default function DailyForecastContainer({
   dailyWeatherData,
 }: {
-  dailyWeatherData: DailyWeatherDataTypes;
+  dailyWeatherData: DailyWeather;
 }) {
   const isCelsius = usePreferencesStore((state) => state.temperature.isCelsius);
-
-  function mapDailyTemps({
-    temperatureMax = [],
-    temperatureMin = [],
-    time = [],
-  }: Partial<DailyWeatherDataTypes> = {}) {
-    return time.map((date, i) => ({
-      date: new Date(date).toLocaleDateString("en-US", {
-        weekday: "short",
-      }),
-      max: temperatureMax[i],
-      min: temperatureMin[i],
-    }));
-  }
 
   const daily = dailyWeatherData ?? {
     temperatureMax: [],
     temperatureMin: [],
+    weatherCode: [],
     time: [],
   };
 
-  const result = mapDailyTemps(daily);
+  const formatTemp = (celsius: number) =>
+    isCelsius ? celsius.toFixed() : convert.temp.toF(celsius);
 
   return (
     <section className={styles.container}>
       <p>Daily Forecast</p>
       <div className={styles.days_container}>
-        {result.map((dayData, index) => (
+        {daily.time.map((date, index) => (
           <DailyForecastDay
             key={index}
-            day={dayData.date}
-            temperatureMax={
-              dayData.max && isCelsius
-                ? dayData.max.toFixed() + "°"
-                : convert.temp.toF(dayData.max) + "°"
-            }
-            temperatureMin={
-              dayData.min && isCelsius
-                ? dayData.min.toFixed() + "°"
-                : convert.temp.toF(dayData.min) + "°"
-            }
+            day={date.toLocaleDateString("en-US", {
+              weekday: "short",
+            })}
+            temperatureMax={`${formatTemp(daily.temperatureMax[index])}°`}
+            temperatureMin={`${formatTemp(daily.temperatureMin[index])}°`}
+            weatherCode={daily.weatherCode[index]}
           />
         ))}
       </div>

@@ -1,6 +1,6 @@
 "use server";
 
-type ReverseGeocodingResponse = {
+export type ReverseGeocodingResponse = {
   city?: string;
   locality?: string;
   principalSubdivision?: string;

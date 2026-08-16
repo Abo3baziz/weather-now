@@ -1,29 +1,14 @@
-import { useLocationStore } from '@/store/userActiveLocation.store';
-import { fetchWeatherData } from './fetchWeatherData';
-
-const setActiveLocation = useLocationStore.getState().setActiveLocation;
-
-const success = (position: GeolocationPosition) => {
-  const data = {
-    latitude: position.coords.latitude,
-    longitude: position.coords.longitude,
-  };
-
-  // set location in localstorage
-  localStorage.setItem('location', JSON.stringify(data));
-
-  // set location in location state
-  setActiveLocation({
-    latitude: position.coords.latitude,
-    longitude: position.coords.longitude,
-  });
+export type GeoCoordinates = {
+  latitude: number;
+  longitude: number;
 };
 
-interface PositionOptions {
-  enableHighAccuracy?: boolean;
-  timeout?: number;
-  maximumAge?: number;
-}
+type GeolocationHandlers = {
+  onPosition?: (coords: GeoCoordinates) => void;
+  onError?: (error: GeolocationPositionError) => void;
+};
+
+const STORAGE_KEY = "location";
 
 const options: PositionOptions = {
   enableHighAccuracy: true,
@@ -31,11 +16,54 @@ const options: PositionOptions = {
   maximumAge: Infinity,
 };
 
-const error = (err: GeolocationPositionError) => {
-  // TODO handle errors in globel error state
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-};
+function getCachedPosition(): GeoCoordinates | null {
+  const cached = localStorage.getItem(STORAGE_KEY);
 
-export default function getUserLocation() {
-  navigator.geolocation.getCurrentPosition(success, error, options);
+  if (!cached) return null;
+
+  try {
+    const parsed = JSON.parse(cached) as GeoCoordinates;
+
+    if (
+      typeof parsed?.latitude === "number" &&
+      typeof parsed?.longitude === "number"
+    ) {
+      return parsed;
+    }
+  } catch {
+    // ignore corrupted cache
+  }
+
+  return null;
+}
+
+export default function getUserLocation({
+  onPosition,
+  onError,
+}: GeolocationHandlers = {}) {
+  const cached = getCachedPosition();
+
+  if (cached) onPosition?.(cached);
+
+  if (typeof navigator === "undefined" || !navigator.geolocation) {
+    onError?.(new GeolocationPositionError());
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const coords: GeoCoordinates = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      };
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(coords));
+
+      onPosition?.(coords);
+    },
+    (error) => {
+      onError?.(error);
+    },
+    options,
+  );
 }

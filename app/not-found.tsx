@@ -1,4 +1,4 @@
-import NotFound from "../components/Not-Found/Not-Found";
+import { NotFound } from "@/components";
 
 export default function notFound() {
   return <NotFound errorMessage="" errorTitle="" />;

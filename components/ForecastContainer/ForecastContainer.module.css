@@ -6,3 +6,40 @@
   row-gap: 1.5rem;
   column-gap: 1.5rem;
 }
+
+.stateBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: 16rem;
+  padding: var(--space-8);
+  text-align: center;
+  background-color: var(--surface-secondary);
+  border-radius: var(--space-4);
+}
+
+.stateTitle {
+  font-family: var(--font-bricolage);
+  font-size: 1.5rem;
+}
+
+.stateText {
+  color: var(--text-secondary);
+  max-width: 24rem;
+}
+
+.retryButton {
+  margin-top: var(--space-3);
+  background-color: var(--surface-button);
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--space-2);
+  padding: 0.525rem 1.25rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--surface-button-hover);
+  }
+}

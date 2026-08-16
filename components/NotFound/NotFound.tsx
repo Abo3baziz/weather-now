@@ -1,4 +1,4 @@
-import styles from "./Not-Found.module.css";
+import styles from "./NotFound.module.css";
 import MainContainer from "../MainContainer/MainContainer";
 import iconError from "@/public/images/icon-error.svg";
 import iconRetry from "@/public/images/icon-retry.svg";

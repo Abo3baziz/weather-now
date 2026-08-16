@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 type PreferencesState = {
   isMetric: boolean;
@@ -24,64 +25,69 @@ type PreferencesActions = {
 
 type PreferencesStore = PreferencesState & PreferencesActions;
 
-const usePreferencesStore = create<PreferencesStore>((set) => ({
-  // state
-  isMetric: true,
-  temperature: { isCelsius: true },
-  windSpeed: { isKm: true },
-  precipitation: { isMm: true },
+const usePreferencesStore = create<PreferencesStore>()(
+  persist(
+    (set) => ({
+      // state
+      isMetric: true,
+      temperature: { isCelsius: true },
+      windSpeed: { isKm: true },
+      precipitation: { isMm: true },
 
-  // actions
-  toggleMetricSystem: (value) =>
-    set((state) => {
-      const next =
-        typeof value === "function"
-          ? value(state.isMetric)
-          : (value ?? !state.isMetric);
+      // actions
+      toggleMetricSystem: (value) =>
+        set((state) => {
+          const next =
+            typeof value === "function"
+              ? value(state.isMetric)
+              : (value ?? !state.isMetric);
 
-      return {
-        isMetric: next,
-        temperature: { isCelsius: next },
-        windSpeed: { isKm: next },
-        precipitation: { isMm: next },
-      };
+          return {
+            isMetric: next,
+            temperature: { isCelsius: next },
+            windSpeed: { isKm: next },
+            precipitation: { isMm: next },
+          };
+        }),
+
+      toggleTemperature: (value) =>
+        set((state) => {
+          const next =
+            typeof value === "function"
+              ? value(state.temperature.isCelsius)
+              : (value ?? !state.temperature.isCelsius);
+
+          return {
+            temperature: { isCelsius: next },
+          };
+        }),
+
+      toggleWindSpeed: (value) =>
+        set((state) => {
+          const next =
+            typeof value === "function"
+              ? value(state.windSpeed.isKm)
+              : (value ?? !state.windSpeed.isKm);
+
+          return {
+            windSpeed: { isKm: next },
+          };
+        }),
+
+      togglePrecipitation: (value) =>
+        set((state) => {
+          const next =
+            typeof value === "function"
+              ? value(state.precipitation.isMm)
+              : (value ?? !state.precipitation.isMm);
+
+          return {
+            precipitation: { isMm: next },
+          };
+        }),
     }),
-
-  toggleTemperature: (value) =>
-    set((state) => {
-      const next =
-        typeof value === "function"
-          ? value(state.temperature.isCelsius)
-          : (value ?? !state.temperature.isCelsius);
-
-      return {
-        temperature: { isCelsius: next },
-      };
-    }),
-
-  toggleWindSpeed: (value) =>
-    set((state) => {
-      const next =
-        typeof value === "function"
-          ? value(state.windSpeed.isKm)
-          : (value ?? !state.windSpeed.isKm);
-
-      return {
-        windSpeed: { isKm: next },
-      };
-    }),
-
-  togglePrecipitation: (value) =>
-    set((state) => {
-      const next =
-        typeof value === "function"
-          ? value(state.precipitation.isMm)
-          : (value ?? !state.precipitation.isMm);
-
-      return {
-        precipitation: { isMm: next },
-      };
-    }),
-}));
+    { name: "weather-now-preferences" },
+  ),
+);
 
 export { usePreferencesStore };
